@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💋 赛博亲亲 · 一次十元 · 童叟无欺 💋</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 30% 20%, #ffb3c1 0%, #ff4d6d 35%, #c9184a 70%, #590d22 100%);
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    cursor: none;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255,200,220,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  /* Feathered mouth — soft radial mask fades the rectangular photo edge
+     into transparency so each mouth blends into the red background */
+  .mouth {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: auto;
+    pointer-events: none;
+    will-change: transform;
+    transform-origin: center;
+    -webkit-mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+            mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+    mix-blend-mode: screen;
+    filter:
+      drop-shadow(0 0 25px rgba(255, 100, 130, 0.6))
+      drop-shadow(0 0 50px rgba(255, 50, 100, 0.3))
+      saturate(1.4)
+      brightness(1.15);
+    opacity: 0.92;
+  }
+
+  @keyframes fly1  { 0%{transform:translate(-55vw,-60vh) scale(0.4) rotate(0deg);} 50%{transform:translate(30vw,20vh) scale(1.1) rotate(180deg);} 100%{transform:translate(60vw,60vh) scale(0.5) rotate(360deg);} }
+  @keyframes fly2  { 0%{transform:translate(50vw,-60vh) scale(0.6) rotate(45deg);} 50%{transform:translate(-20vw,10vh) scale(1.3) rotate(-90deg);} 100%{transform:translate(-60vw,70vh) scale(0.4) rotate(-280deg);} }
+  @keyframes fly3  { 0%{transform:translate(-60vw,40vh) scale(0.5) rotate(-30deg);} 50%{transform:translate(10vw,-30vh) scale(1.2) rotate(120deg);} 100%{transform:translate(60vw,-60vh) scale(0.3) rotate(300deg);} }
+  @keyframes fly4  { 0%{transform:translate(60vw,50vh) scale(0.7) rotate(15deg);} 50%{transform:translate(-15vw,-10vh) scale(0.9) rotate(-150deg);} 100%{transform:translate(-70vw,-60vh) scale(0.4) rotate(-320deg);} }
+  @keyframes fly5  { 0%{transform:translate(0vw,-70vh) scale(0.5) rotate(0deg);} 50%{transform:translate(25vw,0vh) scale(1.4) rotate(180deg);} 100%{transform:translate(0vw,70vh) scale(0.5) rotate(360deg);} }
+  @keyframes fly6  { 0%{transform:translate(-70vw,0vh) scale(0.4) rotate(90deg);} 50%{transform:translate(0vw,15vh) scale(1.1) rotate(-90deg);} 100%{transform:translate(70vw,0vh) scale(0.4) rotate(-270deg);} }
+  @keyframes fly7  { 0%{transform:translate(40vw,-55vh) scale(0.8) rotate(60deg);} 50%{transform:translate(-20vw,20vh) scale(1.0) rotate(-120deg);} 100%{transform:translate(-50vw,65vh) scale(0.3) rotate(-300deg);} }
+  @keyframes fly8  { 0%{transform:translate(-40vw,55vh) scale(0.6) rotate(-45deg);} 50%{transform:translate(15vw,-5vh) scale(1.3) rotate(60deg);} 100%{transform:translate(55vw,-65vh) scale(0.5) rotate(270deg);} }
+  @keyframes fly9  { 0%{transform:translate(-30vw,-65vh) scale(0.5) rotate(20deg);} 50%{transform:translate(35vw,25vh) scale(0.9) rotate(-140deg);} 100%{transform:translate(65vw,50vh) scale(0.7) rotate(-350deg);} }
+  @keyframes fly10 { 0%{transform:translate(65vw,30vh) scale(0.4) rotate(100deg);} 50%{transform:translate(0vw,-20vh) scale(1.2) rotate(-50deg);} 100%{transform:translate(-65vw,-40vh) scale(0.6) rotate(-220deg);} }
+  @keyframes fly11 { 0%{transform:translate(20vw,65vh) scale(0.7) rotate(-10deg);} 50%{transform:translate(-25vw,5vh) scale(1.0) rotate(170deg);} 100%{transform:translate(-60vw,-55vh) scale(0.3) rotate(310deg);} }
+  @keyframes fly12 { 0%{transform:translate(-20vw,-65vh) scale(0.6) rotate(-70deg);} 50%{transform:translate(30vw,-5vh) scale(1.4) rotate(80deg);} 100%{transform:translate(60vw,55vh) scale(0.4) rotate(250deg);} }
+  @keyframes fly13 { 0%{transform:translate(-55vw,25vh) scale(0.8) rotate(35deg);} 50%{transform:translate(5vw,-25vh) scale(0.9) rotate(-110deg);} 100%{transform:translate(55vw,25vh) scale(0.6) rotate(290deg);} }
+  @keyframes fly14 { 0%{transform:translate(55vw,-25vh) scale(0.5) rotate(-20deg);} 50%{transform:translate(-10vw,25vh) scale(1.1) rotate(140deg);} 100%{transform:translate(-55vw,-25vh) scale(0.7) rotate(-230deg);} }
+  @keyframes fly15 { 0%{transform:translate(10vw,-60vh) scale(0.7) rotate(0deg);} 50%{transform:translate(-30vw,30vh) scale(1.0) rotate(200deg);} 100%{transform:translate(50vw,60vh) scale(0.4) rotate(400deg);} }
+  @keyframes fly16 { 0%{transform:translate(-65vw,-30vh) scale(0.4) rotate(50deg);} 50%{transform:translate(20vw,10vh) scale(1.3) rotate(-80deg);} 100%{transform:translate(65vw,40vh) scale(0.5) rotate(-260deg);} }
+  @keyframes fly17 { 0%{transform:translate(35vw,-70vh) scale(0.6) rotate(-55deg);} 50%{transform:translate(-35vw,15vh) scale(1.2) rotate(110deg);} 100%{transform:translate(-45vw,60vh) scale(0.4) rotate(280deg);} }
+  @keyframes fly18 { 0%{transform:translate(-45vw,-50vh) scale(0.8) rotate(25deg);} 50%{transform:translate(20vw,30vh) scale(0.95) rotate(-160deg);} 100%{transform:translate(70vw,-45vh) scale(0.5) rotate(-340deg);} }
+  @keyframes fly19 { 0%{transform:translate(70vw,0vh) scale(0.5) rotate(-80deg);} 50%{transform:translate(-5vw,-15vh) scale(1.5) rotate(40deg);} 100%{transform:translate(-70vw,30vh) scale(0.3) rotate(220deg);} }
+  @keyframes fly20 { 0%{transform:translate(-25vw,70vh) scale(0.4) rotate(75deg);} 50%{transform:translate(25vw,-10vh) scale(1.0) rotate(-100deg);} 100%{transform:translate(50vw,-70vh) scale(0.6) rotate(-320deg);} }
+  @keyframes fly21 { 0%{transform:translate(0vw,65vh) scale(0.5) rotate(0deg);} 50%{transform:translate(-40vw,-5vh) scale(1.3) rotate(-180deg);} 100%{transform:translate(0vw,-65vh) scale(0.4) rotate(-360deg);} }
+  @keyframes fly22 { 0%{transform:translate(-60vw,60vh) scale(0.7) rotate(-40deg);} 50%{transform:translate(0vw,-10vh) scale(0.9) rotate(90deg);} 100%{transform:translate(60vw,-60vh) scale(0.5) rotate(280deg);} }
+  @keyframes fly23 { 0%{transform:translate(60vw,-65vh) scale(0.6) rotate(100deg);} 50%{transform:translate(-15vw,5vh) scale(1.2) rotate(-70deg);} 100%{transform:translate(-65vw,55vh) scale(0.4) rotate(-250deg);} }
+  @keyframes fly24 { 0%{transform:translate(-35vw,-45vh) scale(0.5) rotate(15deg);} 50%{transform:translate(40vw,-15vh) scale(1.4) rotate(-130deg);} 100%{transform:translate(45vw,65vh) scale(0.6) rotate(-310deg);} }
+  @keyframes fly25 { 0%{transform:translate(50vw,45vh) scale(0.4) rotate(-25deg);} 50%{transform:translate(-30vw,-20vh) scale(1.1) rotate(150deg);} 100%{transform:translate(-55vw,-60vh) scale(0.3) rotate(330deg);} }
+  @keyframes fly26 { 0%{transform:translate(-15vw,-70vh) scale(0.7) rotate(85deg);} 50%{transform:translate(40vw,10vh) scale(0.85) rotate(-55deg);} 100%{transform:translate(-20vw,70vh) scale(0.6) rotate(-235deg);} }
+  @keyframes fly27 { 0%{transform:translate(-70vw,25vh) scale(0.6) rotate(-95deg);} 50%{transform:translate(10vw,-30vh) scale(1.25) rotate(65deg);} 100%{transform:translate(70vw,15vh) scale(0.4) rotate(245deg);} }
+  @keyframes fly28 { 0%{transform:translate(45vw,-30vh) scale(0.5) rotate(30deg);} 50%{transform:translate(-40vw,0vh) scale(1.0) rotate(-170deg);} 100%{transform:translate(35vw,60vh) scale(0.7) rotate(-350deg);} }
+  @keyframes fly29 { 0%{transform:translate(-50vw,70vh) scale(0.4) rotate(-10deg);} 50%{transform:translate(30vw,-20vh) scale(1.35) rotate(125deg);} 100%{transform:translate(-40vw,-60vh) scale(0.5) rotate(305deg);} }
+  @keyframes fly30 { 0%{transform:translate(25vw,70vh) scale(0.6) rotate(70deg);} 50%{transform:translate(-45vw,20vh) scale(1.1) rotate(-60deg);} 100%{transform:translate(55vw,-55vh) scale(0.4) rotate(-240deg);} }
+  @keyframes fly31 { 0%{transform:translate(-25vw,35vh) scale(0.8) rotate(-65deg);} 50%{transform:translate(30vw,-35vh) scale(0.95) rotate(105deg);} 100%{transform:translate(-60vw,45vh) scale(0.5) rotate(285deg);} }
+  @keyframes fly32 { 0%{transform:translate(70vw,-40vh) scale(0.4) rotate(5deg);} 50%{transform:translate(-20vw,15vh) scale(1.3) rotate(-145deg);} 100%{transform:translate(0vw,70vh) scale(0.6) rotate(-325deg);} }
+
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 25px rgba(255,100,130,0.6)) drop-shadow(0 0 50px rgba(255,50,100,0.3)) saturate(1.4) brightness(1.1); }
+    50%      { filter: drop-shadow(0 0 40px rgba(255,150,180,1.0)) drop-shadow(0 0 80px rgba(255,80,130,0.6)) saturate(1.6) brightness(1.3); }
+  }
+
+  /* FAST speeds — 3 to 6 seconds per loop */
+  .m1  { animation: fly1  4s   linear infinite, pulse 0.9s  ease-in-out infinite; }
+  .m2  { animation: fly2  5s   linear infinite, pulse 1.0s  ease-in-out infinite; animation-delay: -1.2s, 0s; }
+  .m3  { animation: fly3  3.5s linear infinite, pulse 0.8s  ease-in-out infinite; animation-delay: -2.1s, 0s; }
+  .m4  { animation: fly4  5.5s linear infinite, pulse 1.1s  ease-in-out infinite; animation-delay: -0.8s, 0s; }
+  .m5  { animation: fly5  4.5s linear infinite, pulse 0.95s ease-in-out infinite; animation-delay: -3.0s, 0s; }
+  .m6  { animation: fly6  3s   linear infinite, pulse 0.85s ease-in-out infinite; animation-delay: -1.5s, 0s; }
+  .m7  { animation: fly7  5s   linear infinite, pulse 1.05s ease-in-out infinite; animation-delay: -3.8s, 0s; }
+  .m8  { animation: fly8  4s   linear infinite, pulse 0.9s  ease-in-out infinite; animation-delay: -0.3s, 0s; }
+  .m9  { animation: fly9  6s   linear infinite, pulse 1.15s ease-in-out infinite; animation-delay: -2.5s, 0s; }
+  .m10 { animation: fly10 3.5s linear infinite, pulse 0.8s  ease-in-out infinite; animation-delay: -1.8s, 0s; }
+  .m11 { animation: fly11 5s   linear infinite, pulse 1.0s  ease-in-out infinite; animation-delay: -3.2s, 0s; }
+  .m12 { animation: fly12 4.5s linear infinite, pulse 0.95s ease-in-out infinite; animation-delay: -1.1s, 0s; }
+  .m13 { animation: fly13 3s   linear infinite, pulse 0.85s ease-in-out infinite; animation-delay: -2.2s, 0s; }
+  .m14 { animation: fly14 5.5s linear infinite, pulse 1.1s  ease-in-out infinite; animation-delay: -4.0s, 0s; }
+  .m15 { animation: fly15 4s   linear infinite, pulse 0.9s  ease-in-out infinite; animation-delay: -1.5s, 0s; }
+  .m16 { animation: fly16 5s   linear infinite, pulse 1.05s ease-in-out infinite; animation-delay: -2.7s, 0s; }
+  .m17 { animation: fly17 3.5s linear infinite, pulse 0.8s  ease-in-out infinite; animation-delay: -0.5s, 0s; }
+  .m18 { animation: fly18 4.5s linear infinite, pulse 0.95s ease-in-out infinite; animation-delay: -2.0s, 0s; }
+  .m19 { animation: fly19 5.5s linear infinite, pulse 1.1s  ease-in-out infinite; animation-delay: -3.5s, 0s; }
+  .m20 { animation: fly20 3s   linear infinite, pulse 0.85s ease-in-out infinite; animation-delay: -1.0s, 0s; }
+  .m21 { animation: fly21 4s   linear infinite, pulse 0.9s  ease-in-out infinite; animation-delay: -2.8s, 0s; }
+  .m22 { animation: fly22 5s   linear infinite, pulse 1.0s  ease-in-out infinite; animation-delay: -3.6s, 0s; }
+  .m23 { animation: fly23 4.5s linear infinite, pulse 0.95s ease-in-out infinite; animation-delay: -0.7s, 0s; }
+  .m24 { animation: fly24 6s   linear infinite, pulse 1.15s ease-in-out infinite; animation-delay: -4.2s, 0s; }
+  .m25 { animation: fly25 3.5s linear infinite, pulse 0.8s  ease-in-out infinite; animation-delay: -1.9s, 0s; }
+  .m26 { animation: fly26 5s   linear infinite, pulse 1.05s ease-in-out infinite; animation-delay: -2.4s, 0s; }
+  .m27 { animation: fly27 4s   linear infinite, pulse 0.9s  ease-in-out infinite; animation-delay: -3.1s, 0s; }
+  .m28 { animation: fly28 5.5s linear infinite, pulse 1.1s  ease-in-out infinite; animation-delay: -0.4s, 0s; }
+  .m29 { animation: fly29 3s   linear infinite, pulse 0.85s ease-in-out infinite; animation-delay: -1.7s, 0s; }
+  .m30 { animation: fly30 4.5s linear infinite, pulse 0.95s ease-in-out infinite; animation-delay: -2.9s, 0s; }
+  .m31 { animation: fly31 5s   linear infinite, pulse 1.0s  ease-in-out infinite; animation-delay: -3.9s, 0s; }
+  .m32 { animation: fly32 4s   linear infinite, pulse 0.9s  ease-in-out infinite; animation-delay: -0.6s, 0s; }
+
+  /* Varied sizes for organic feel — desktop defaults */
+  .sm { width: 120px; }
+  .md { width: 180px; }
+  .lg { width: 260px; }
+  .xl { width: 340px; }
+
+  /* Mobile: shrink everything proportionally so phones don't get face-eaten */
+  @media (max-width: 768px) {
+    .sm { width: 70px; }
+    .md { width: 100px; }
+    .lg { width: 140px; }
+    .xl { width: 180px; }
+  }
+
+  .slogan {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    pointer-events: none;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .slogan-main {
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    font-weight: bold;
+    font-size: clamp(42px, 8vw, 110px);
+    color: #fff0f3;
+    letter-spacing: 4px;
+    text-shadow:
+      0 0 20px rgba(255, 0, 110, 0.8),
+      0 0 40px rgba(255, 0, 110, 0.6),
+      0 4px 12px rgba(0,0,0,0.5),
+      3px 3px 0 #800f2f;
+    line-height: 1.3;
+    animation: wobble 2s ease-in-out infinite;
+  }
+
+  .slogan-sub {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 24px);
+    color: rgba(255, 240, 243, 0.75);
+    letter-spacing: 8px;
+    margin-top: 24px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-1deg) scale(1); }
+    50%      { transform: rotate(1deg) scale(1.03); }
+  }
+
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 55px;
+    height: auto;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    -webkit-mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+            mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+    filter: drop-shadow(0 0 15px rgba(255, 150, 180, 0.8));
+    transition: transform 0.1s ease-out;
+  }
+
+  .close-btn {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.25);
+    font-size: 9px;
+    cursor: pointer;
+    z-index: 200;
+    font-family: monospace;
+  }
+
+  .close-btn:hover {
+    background: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+
+  .hidden { display: none !important; }
+
+  .pop-kiss {
+    position: fixed;
+    width: 100px;
+    height: auto;
+    pointer-events: none;
+    z-index: 500;
+    animation: popUp 1.0s ease-out forwards;
+    transform: translate(-50%, -50%);
+    -webkit-mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+            mask-image: radial-gradient(ellipse 45% 38% at center, black 35%, transparent 80%);
+    filter: drop-shadow(0 0 25px rgba(255, 150, 180, 0.9));
+  }
+
+  @keyframes popUp {
+    0%   { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 1; }
+    100% { transform: translate(-50%, -200%) scale(2) rotate(25deg); opacity: 0; }
+  }
+
+  .watermark {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    color: rgba(255, 240, 243, 0.35);
+    font-size: 10px;
+    letter-spacing: 4px;
+    z-index: 100;
+    font-family: monospace;
+  }
+
+  .price-tag {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #ffd60a;
+    color: #c9184a;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transform: rotate(-8deg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 100;
+    border: 2px dashed #c9184a;
+  }
+</style>
+</head>
+<body>
+
+<button class="close-btn" onclick="document.body.classList.add('hidden')" title="×">×</button>
+
+<div class="price-tag">¥10 / 次</div>
+
+<div class="sky">
+  <img class="mouth m1  sm" src="mouth.jpg" alt="">
+  <img class="mouth m2  md" src="mouth.jpg" alt="">
+  <img class="mouth m3  lg" src="mouth.jpg" alt="">
+  <img class="mouth m4  md" src="mouth.jpg" alt="">
+  <img class="mouth m5  sm" src="mouth.jpg" alt="">
+  <img class="mouth m6  xl" src="mouth.jpg" alt="">
+  <img class="mouth m7  md" src="mouth.jpg" alt="">
+  <img class="mouth m8  lg" src="mouth.jpg" alt="">
+  <img class="mouth m9  sm" src="mouth.jpg" alt="">
+  <img class="mouth m10 md" src="mouth.jpg" alt="">
+  <img class="mouth m11 lg" src="mouth.jpg" alt="">
+  <img class="mouth m12 sm" src="mouth.jpg" alt="">
+  <img class="mouth m13 md" src="mouth.jpg" alt="">
+  <img class="mouth m14 xl" src="mouth.jpg" alt="">
+  <img class="mouth m15 sm" src="mouth.jpg" alt="">
+  <img class="mouth m16 md" src="mouth.jpg" alt="">
+  <img class="mouth m17 lg" src="mouth.jpg" alt="">
+  <img class="mouth m18 sm" src="mouth.jpg" alt="">
+  <img class="mouth m19 md" src="mouth.jpg" alt="">
+  <img class="mouth m20 xl" src="mouth.jpg" alt="">
+  <img class="mouth m21 sm" src="mouth.jpg" alt="">
+  <img class="mouth m22 lg" src="mouth.jpg" alt="">
+  <img class="mouth m23 md" src="mouth.jpg" alt="">
+  <img class="mouth m24 sm" src="mouth.jpg" alt="">
+  <img class="mouth m25 md" src="mouth.jpg" alt="">
+  <img class="mouth m26 lg" src="mouth.jpg" alt="">
+  <img class="mouth m27 sm" src="mouth.jpg" alt="">
+  <img class="mouth m28 md" src="mouth.jpg" alt="">
+  <img class="mouth m29 xl" src="mouth.jpg" alt="">
+  <img class="mouth m30 sm" src="mouth.jpg" alt="">
+  <img class="mouth m31 lg" src="mouth.jpg" alt="">
+  <img class="mouth m32 md" src="mouth.jpg" alt="">
+</div>
+
+<div class="slogan">
+  <div class="slogan-main">赛博亲亲哦~<br>一次十元~ 童叟无欺~</div>
+  <div class="slogan-sub">· mumu certified kiss ·</div>
+</div>
+
+<img class="cursor" src="mouth.jpg" alt="">
+
+<div class="watermark">MUMU ™ · EST. 2026 · ALL RIGHTS RESERVED</div>
+
+<script>
+  const cursor = document.querySelector('.cursor');
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close-btn')) return;
+    const kiss = document.createElement('img');
+    kiss.className = 'pop-kiss';
+    kiss.src = 'mouth.jpg';
+    kiss.style.left = e.clientX + 'px';
+    kiss.style.top = e.clientY + 'px';
+    document.body.appendChild(kiss);
+    setTimeout(() => kiss.remove(), 1000);
+  });
+</script>
+
+</body>
+</html>
